@@ -1,0 +1,12 @@
+cover: cover.png
+playlist:
+  - file: "ArapSaci.opus"
+    title: "ArapSaci"
+    duration_sec: 223
+  - file: "Copculer.opus"
+    title: "Copculer"
+    duration_sec: 239
+  - file: "Estarabim.opus"
+    title: "Estarabim"
+    duration_sec: 316
+total_duration_sec: 778
