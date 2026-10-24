@@ -130,7 +130,24 @@ int msp_source_detect(const char *path, msp_source_t **out) {
             }
             s->kind = has_m3u ? MSP_KIND_PLAYLIST : MSP_KIND_FOLDER;
         }
-        scan_dir(path, s);
+        {
+            DIR *d = opendir(path);
+            if (d) {
+                struct dirent *e;
+                while ((e = readdir(d))) {
+                    if (e->d_name[0] == '.') continue;
+                    const char *ext = strrchr(e->d_name, '.');
+                    if (ext && (strcasecmp(ext + 1, "m3u") == 0 || strcasecmp(ext + 1, "m3u8") == 0)) {
+                        char mp[4096];
+                        snprintf(mp, sizeof(mp), "%s/%s", path, e->d_name);
+                        extern int msp_source_load_m3u(const char *m3u_path, msp_source_t *s);
+                        msp_source_load_m3u(mp, s);
+                    }
+                }
+                closedir(d);
+            }
+        }
+        if (s->track_count == 0) scan_dir(path, s);
     } else {
         free(s);
         return -1;

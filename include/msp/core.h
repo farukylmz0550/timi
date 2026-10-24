@@ -38,3 +38,5 @@ void msp_str_trim(char *s);
 int msp_source_load_yaml(const char *yaml_path, msp_source_t *s);
 
 int msp_source_load_m3u(const char *m3u_path, msp_source_t *s);
+
+int msp_source_load_m3u(const char *m3u_path, msp_source_t *s);

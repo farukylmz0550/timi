@@ -1,1 +1,9 @@
 /target
+
+# C build
+build/
+*.o
+*.a
+*.out
+msmp-cli
+msmp-tui
